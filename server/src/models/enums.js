@@ -1,0 +1,13 @@
+export const PROJECT_TYPES = ['SaaS', 'Multi-tenant SaaS', 'Mobile App', 'Web App', 'API', 'Internal Tool', 'Client Project', 'Other'];
+export const PROJECT_STATUS = ['Idea', 'Development', 'Testing', 'Pilot', 'Production', 'Maintenance', 'Archived'];
+export const TASK_TYPES = ['Development', 'Bug Fix', 'Maintenance', 'Upgrade', 'Feature', 'Deployment', 'Testing', 'Documentation', 'Client Request', 'Meeting', 'Research', 'Other'];
+export const PRIORITIES = ['Critical', 'High', 'Medium', 'Low'];
+export const TASK_STATUS = ['todo', 'in_progress', 'completed', 'blocked'];
+export const BUG_STATUS = ['Open', 'Investigating', 'In Progress', 'Fixed', 'Verified', 'Closed'];
+export const FEATURE_STAGES = ['Idea', 'Planned', 'In Development', 'Testing', 'Released', 'Cancelled'];
+export const ENVIRONMENTS = ['Development', 'Staging', 'Production'];
+export const DEPLOY_STATUS = ['Scheduled', 'In Progress', 'Successful', 'Failed', 'Rolled Back'];
+export const FREQUENCIES = ['daily', 'weekly', 'biweekly', 'monthly', 'custom'];
+export const NOTIF_TYPES = ['Task', 'Maintenance', 'Deployment', 'Client', 'Deadline', 'System'];
+export const EVENT_KINDS = ['Meeting', 'Client appointment', 'Deadline', 'Other'];
+export const TENANT_STATUS = ['Active', 'Trial', 'Suspended', 'Churned'];

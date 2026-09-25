@@ -22,7 +22,7 @@ export async function generateReminders(owner) {
 
   const overdue = tasks.filter((t) => [t.scheduledDate, t.dueDate].some((d) => d && d < t0));
   if (overdue.length) {
-    await push(`overdue:${ymd()}`, 'Task', `⚠️ You have ${overdue.length} overdue task${overdue.length > 1 ? 's' : ''}`,
+    await push(`overdue:${ymd()}`, 'Task', `You have ${overdue.length} overdue task${overdue.length > 1 ? 's' : ''}`,
       overdue.slice(0, 3).map((t) => t.title).join(', '), '/tasks');
   }
   for (const t of tasks) {
@@ -30,25 +30,25 @@ export async function generateReminders(owner) {
     const when = t.scheduledDate;
     if (t.type === 'Maintenance' && when && when >= t0 && when < t2) {
       await push(`maint:${t._id}:${dateOnly(when)}`, 'Maintenance',
-        `🔔 ${name} maintenance is ${when < t1 ? 'today' : 'tomorrow'}`, t.title, '/maintenance');
+        `${name} maintenance is ${when < t1 ? 'today' : 'tomorrow'}`, t.title, '/maintenance');
     }
     if (t.type !== 'Maintenance' && t.dueDate && t.dueDate >= t0 && t.dueDate < addDays(t0, 3)) {
       const n = diffDays(t.dueDate, t0);
-      await push(`deadline:${t._id}`, 'Deadline', `📅 Due ${n === 0 ? 'today' : n === 1 ? 'tomorrow' : 'in 2 days'}: ${t.title}`, name, '/tasks');
+      await push(`deadline:${t._id}`, 'Deadline', `Due ${n === 0 ? 'today' : n === 1 ? 'tomorrow' : 'in 2 days'}: ${t.title}`, name, '/tasks');
     }
   }
   for (const d of deps) {
     await push(`dep:${d._id}`, 'Deployment',
-      `🚀 ${d.project?.name} ${d.version} deployment is scheduled for ${d.deployedAt < t1 ? 'today' : 'tomorrow'}`,
+      `${d.project?.name} ${d.version} deployment is scheduled for ${d.deployedAt < t1 ? 'today' : 'tomorrow'}`,
       d.environment, '/deployments');
   }
   for (const p of projects) {
     if (p.lastMaintenanceAt) {
       const n = diffDays(t0, p.lastMaintenanceAt);
-      if (n >= 30) await push(`stale:${p._id}:${ymd().slice(0, 7)}`, 'Maintenance', `📅 ${p.name} has not been maintained for ${n} days`, '', `/projects/${p._id}`);
+      if (n >= 30) await push(`stale:${p._id}:${ymd().slice(0, 7)}`, 'Maintenance', `${p.name} has not been maintained for ${n} days`, '', `/projects/${p._id}`);
     }
   }
   for (const c of clients) {
-    await push(`renewal:${c._id}:${dateOnly(c.subscription.renewalDate)}`, 'Client', `💳 ${c.name}: subscription renews ${dateOnly(c.subscription.renewalDate)}`, '', '/clients');
+    await push(`renewal:${c._id}:${dateOnly(c.subscription.renewalDate)}`, 'Client', `${c.name}: subscription renews ${dateOnly(c.subscription.renewalDate)}`, '', '/clients');
   }
 }

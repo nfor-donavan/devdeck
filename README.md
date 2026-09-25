@@ -54,6 +54,10 @@ client/src
 - **Reminders** (`services/reminders.js`): overdue tasks, maintenance today/tomorrow, deployments, deadlines, projects unmaintained for 30+ days, client renewals. They appear in the bell and Notifications page, each created once.
 - **Search** covers projects, tasks, bugs, features, clients, tenants, deployments and notes. Searching a project name also returns its tasks, bugs, features and notes.
 
+## Branding
+
+The logo (`client/src/components/Logo.jsx`) and favicon (`client/public/favicon.svg`) are original SVGs: a "D" built from three stacked plates in navy and gold, echoing a stack of decks/cards. No external assets are used, so there is nothing to license or attribute.
+
 ## Deploy
 
 - **API** (Render or similar): root `server`, build `npm install`, start `npm start`. Set `MONGO_URI`, `JWT_SECRET`, `CLIENT_URL` (your frontend URL), `TIMEZONE`, `NODE_ENV=production`.

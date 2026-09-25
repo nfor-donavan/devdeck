@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { searchApi } from '../services/resources.js';
+import Icon from './Icon.jsx';
 
 const GROUPS = {
   projects: ['Projects', (r) => `/projects/${r._id}`, (r) => r.name],
@@ -27,6 +28,7 @@ export default function SearchBox() {
   const groups = res ? Object.entries(GROUPS).filter(([k]) => res[k]?.length) : [];
   return (
     <div className="search">
+      <Icon name="search" size={16} />
       <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search everything…" aria-label="Search" />
       {res && (
         <div className="menu wide-menu">

@@ -34,7 +34,7 @@ export default function Dashboard() {
     <>
       <div className="top">
         <div>
-          <h1>Good {h < 12 ? 'morning' : h < 18 ? 'afternoon' : 'evening'}{name ? `, ${name}` : ''} 👋</h1>
+          <h1>Good {h < 12 ? 'morning' : h < 18 ? 'afternoon' : 'evening'}{name ? `, ${name}` : ''}</h1>
           <div className="mu">
             {now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} · {now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}
           </div>

@@ -14,10 +14,11 @@ import Notes from './pages/Notes.jsx';
 import Notifications from './pages/Notifications.jsx';
 import Settings from './pages/Settings.jsx';
 import EntityPage from './components/EntityPage.jsx';
+import Logo from './components/Logo.jsx';
 
 function Protected({ children }) {
   const { user, ready } = useAuth();
-  if (!ready) return <p className="mu pad">Loading…</p>;
+  if (!ready) return <div className="splash"><Logo size={60} text={false} /></div>;
   return user ? children : <Navigate to="/login" replace />;
 }
 

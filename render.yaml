@@ -1,0 +1,38 @@
+# Render Blueprint: New > Blueprint > pick this repo. Creates the API and the website together.
+# If Render adds a suffix to the service names, fix CLIENT_URL and VITE_API_URL below/in the dashboard.
+services:
+  - type: web
+    name: devdeck-api
+    runtime: node
+    plan: free
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false            # paste your Atlas connection string in the Render dashboard
+      - key: JWT_SECRET
+        generateValue: true    # Render creates a random secret
+      - key: CLIENT_URL
+        value: https://devdeck-web.onrender.com
+      - key: TIMEZONE
+        value: Africa/Douala
+      - key: ALLOW_REGISTER
+        value: "false"
+
+  - type: web
+    name: devdeck-web
+    runtime: static
+    rootDir: client
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://devdeck-api.onrender.com/api
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
